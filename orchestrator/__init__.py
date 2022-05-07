@@ -1,0 +1,33 @@
+from enum import auto
+import logging
+import json
+import os
+from datetime import datetime
+import profile
+import azure.functions as func 
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+
+    
+    #["analysis_subOrch", "chart_v2_subOrch", "chart_v3_subOrch", "holders_subOrch",
+    # "holdings_subOrch", "insider_roster_subOrch", "insider_transaction_subOrch",
+    # "options_subOrch", "profile_subOrch", "recommendations_subOrch", "time_series_subOrch",
+    # "upgrade_downgrades_subOrch"]
+
+    activity_function_list= ["analysis_subOrch"]
+
+    # Run multiple device provisioning flows in parallel 
+    provisioning_tasks= []
+    for func_name in activity_function_list:
+        provision_task= context.call_sub_orchestrator(func_name)
+        provisioning_tasks.append(provision_task)
+
+    yield context.task_all(provisioning_tasks)
+
+    return "Success"
+
+main= df.Orchestrator.create(orchestrator_function)
+
+
+
