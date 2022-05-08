@@ -8,10 +8,9 @@ import shared.function_mover as fm
 import shared.query_string as qs
 
 def orchestrator_function(context: df.DurableOrchestrationContext):
-
-    yield context.call_activity('analysis', "None")
     
+    yield context.call_activity('holdings', "None")
+
     return "Success!"
 
-main= df.Orchestrator.create(orchestrator_function)
-
+main=df.Orchestrator.create(orchestrator_function)

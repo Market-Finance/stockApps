@@ -128,7 +128,7 @@ def insider_roster_mover_out(inMemory_data):
     m.data_lake_storage_upload(inMemory_data, data_lake_file_path, data_lake_file_name)
     return "Success!"
 
-def insider_transaction_mover_out(inMemory_data):
+def insider_transactions_mover_out(inMemory_data):
     """
     DESCRIPTION: The purpose of this function is to move mined insider transaction
                  to this desired blob storage and data lake location 

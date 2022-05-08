@@ -9,7 +9,7 @@ import shared.query_string as qs
 
 def orchestrator_function(context: df.DurableOrchestrationContext):
 
-    yield context.call_activity('analysis', "None")
+    yield context.call_activity('chart_v3', "None")
     
     return "Success!"
 

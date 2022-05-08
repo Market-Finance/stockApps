@@ -9,13 +9,10 @@ import azure.durable_functions as df
 
 def orchestrator_function(context: df.DurableOrchestrationContext):
 
-    
-    #["analysis_subOrch", "chart_v2_subOrch", "chart_v3_subOrch", "holders_subOrch",
-    # "holdings_subOrch", "insider_roster_subOrch", "insider_transaction_subOrch",
-    # "options_subOrch", "profile_subOrch", "recommendations_subOrch", "time_series_subOrch",
-    # "upgrade_downgrades_subOrch"]
-
-    activity_function_list= ["analysis_subOrch"]
+    activity_function_list= ["analysis_subOrch", "chart_v2_subOrch", "chart_v3_subOrch",
+                             "holders_subOrch", "holdings_subOrch", "insider_roster_subOrch",
+                             "insider_transactions_subOrch", "options_subOrch", "profile_subOrch",
+                             "recommendations_SubOrch", "time_series_subOrch", "upgrade_downgrades_subOrch"]
 
     # Run multiple device provisioning flows in parallel 
     provisioning_tasks= []
