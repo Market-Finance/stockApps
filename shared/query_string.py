@@ -176,3 +176,32 @@ def upgrade_downgrades_query_string(data:list):
         queryString_list.append(queryString) 
     
     return queryString_list
+
+def statistics_v2_query_string(data:list):
+    """
+    DESCRIPTION: The purpose of this method is to extract the
+    query string for the stock get statistics v2 analysis API
+    INPUT: List of JSON [Auto_complete]
+    OUTPUT: List of query strings- List of dictionaries
+    """
+    queryString_list= list()
+    for i in range(len(data)):
+        queryString= {"symbol": data[i]['q']}
+        queryString_list.append(queryString)
+
+    return queryString_list
+
+def statistics_v3_query_string(data:list):
+    """
+    DESCRIPTION: The purpose of this method is to extract the
+    query string for the stock get statistics v3 analysis API 
+    INPUT: List of JSON [Auto_complete]
+    OUTPUT: List of query strings- List of dictionaries
+    """
+    queryString_list= list()
+    for i in range(len(data)):
+        queryString= {"symbol": data[i]['q']}
+        queryString_list.append(queryString)
+
+    return queryString_list
+

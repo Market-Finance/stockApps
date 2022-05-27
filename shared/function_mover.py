@@ -243,4 +243,44 @@ def upgrade_downgrades_mover_out(inMemory_data):
     return "Success!"
 
 
+def statistics_v2_mover_out(inMemory_data):
+    """
+    DESCRIPTION: The purpose of this function is to move mined upgrade and
+                 downgrade to this desired blob storage and data lake location 
+    INPUT: None
+    OUTPUT: status string
+    """
+    # Blob file path and file_name destination
+    blob_file_path= 'MarketFinance/stock'
+    blob_file_name= 'statistics_v2.json'
+
+    # Data Lake path and file_name destination
+    data_lake_file_path= 'stock/statistics_v2'
+    data_lake_file_name= 'statistics_v2'
+
+    m.blob_storage_upload(inMemory_data, blob_file_path, blob_file_name)
+    m.data_lake_storage_upload(inMemory_data, data_lake_file_path, data_lake_file_name)
+    return "Success!"
+
+
+def statistics_v3_mover_out(inMemory_data):
+    """
+    DESCRIPTION: The purpose of this function is to move mined upgrade and
+                 downgrade to this desired blob storage and data lake location 
+    INPUT: None
+    OUTPUT: status string
+    """
+    # Blob file path and file_name destination
+    blob_file_path= 'MarketFinance/stock'
+    blob_file_name= 'statistics_v3.json'
+
+    # Data Lake path and file_name destination
+    data_lake_file_path= 'stock/statistics_v3'
+    data_lake_file_name= 'statistics_v3'
+
+    m.blob_storage_upload(inMemory_data, blob_file_path, blob_file_name)
+    m.data_lake_storage_upload(inMemory_data, data_lake_file_path, data_lake_file_name)
+    return "Success!"
+
+
 

@@ -56,7 +56,7 @@ def datalake_service_client():
 def return_blob_files(container_client):
     """
     DESCRIPTION: The purpose of this function is to return all the blob files
-    INPUT: container_cliet
+    INPUT: container_client
     OUTPUT: list of blob files
     """
     blob_files= [blob for blob in container_client.list_blobs()]

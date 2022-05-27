@@ -12,7 +12,8 @@ def orchestrator_function(context: df.DurableOrchestrationContext):
     activity_function_list= ["analysis_subOrch", "chart_v2_subOrch", "chart_v3_subOrch",
                              "holders_subOrch", "holdings_subOrch", "insider_roster_subOrch",
                              "insider_transactions_subOrch", "options_subOrch", "profile_subOrch",
-                             "recommendations_SubOrch", "time_series_subOrch", "upgrade_downgrades_subOrch"]
+                             "recommendations_SubOrch", "time_series_subOrch", "upgrade_downgrades_subOrch",
+                             "statistics_v2", "statistics_v3"]
 
     # Run multiple device provisioning flows in parallel 
     provisioning_tasks= []
