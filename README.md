@@ -272,51 +272,51 @@ Mover file is a compilation of various code snips such as, blob_container_servic
     J --> A
         subgraph Stock Application Durable Functions HTTP Start   
             subgraph Orchestrator
-                subgraph Analysis sub-orch
+                subgraph sub-orch_a
                     A --> A1
                     end
                 
-                subgraph Chart_v2 sub-orch
+                subgraph sub-orch_c2
                     A --> A2
                     end
 
-                subgraph Chart_v3 sub-orch
+                subgraph sub-orch_c3
                     A --> A3
                     end
                 
-                subgraph Holders sub-orch
+                subgraph sub-orch_h
                     A --> A4
                     end
 
-                subgraph Holdings sub-orch
+                subgraph sub-orch_hi
                     A --> A5
                     end
 
-                subgraph Insider roster sub-orch
+                subgraph sub-orch_ir
                     A --> A6
                     end
                 
-                subgraph Insider transactions sub-orch
+                subgraph sub-orch_it
                     A --> A7
                     end
                 
-                subgraph Options sub-orch
+                subgraph sub-orch_o
                     A --> A8
                     end
 
-                subgraph Profile sub-orch
+                subgraph sub-orch_p
                     A --> A9
                     end
 
-                subgraph Recommendations sub-orch
+                subgraph sub-orch_r
                     A --> A10
                     end
 
-                subgraph Time series sub-orch
+                subgraph sub-orch_ts
                     A --> A11
                     end
 
-                subgraph upgrades and downgrades sub-orch
+                subgraph sub-orch_ud
                     A --> A12
                     end
                 end
