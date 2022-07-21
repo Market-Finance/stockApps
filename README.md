@@ -1,4 +1,8 @@
 # Market Finance- Stock Application 
+
+Stock application aims to take the extracted Auto_complete file, create a list of the query string, and pass it to analysis, chart_v2, chart_v3, holders, holdings, insider_roster, insider_transactions, options, profile, recommendations, statistics_v2, statistics_v3, time_series and upgrades to extract the individual JSON request files. All the activities are wrapped into individual sub-orchestrator and called upon the orchestrator, and then JSON response is appended and passed through the Yahoo Finance API to pull standardised API's query string for other endpoint requests, as the schema's requirements are slightly different. This execution is the final soultion, as it mitigates non-deterministic workflow and utilises the parallelisation in API calls (maximising the call request). As a result, the sucessess of API calls is increased, and this approach improves the data quality by fixing the data upstream. 
+
+The following details the implementation of the Stock Application (end-to-end)
 ## 1. Local System Setup
 ```
 # Check for python version 3.7 or greater
@@ -169,56 +173,170 @@ click edit, change and save
 for value
 @Microsoft.KeyVault(SecretUri=https://<key_vault_name>.vault.azure.net/secrets/<secret_name>/<version>)
 ```
-## 12. Common Application Implementation Overview
+## 12. Stock Application Implementation Overview
 
-### 12.1 Activities
+### 12.1 Durable functions
+The durable function is an extension of Azure functions that utlisies stateful operations in a severless environment. The extension manages state, checkpoints, and restart based on the demand. Durable parts have several features that make it easy to incoporate durable orchestrations and entities into HTTP workflow.
+
+1. Express your workflows in code
+2. Retry actitives
+3. Run actitives in parallel
+4. Timeout workflows
+5. State management for free
+6. Check on workflow progress with REST API
+7. Cancel workflow
+8. Severless pricing model
+9. Versioning made easier
+10. Develop and test locally distributed
+
+### 12.2 Activities
+The Azure function activity allows running Azure functions in an Azure Data Factory pipeline. By creating a linked services connection, we can run Azure functions. The related service can control the execution plan for an Azure function.
+
 ####  Analysis
-####  Chart_v2
-####  Chart_v3
-####  Holders
-####  Holdings
-####  Insider Roster
-####  Inisder Transactions
-####  Options
-####  Profile
-####  Recommendations
-####  Time Series
-####  Upgrade Downgrades
+Analysis Activity is used to extract the list of the targeted company's daily analysis information. The script was written to scale and merge mulitple sources of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string list runs through the function chaining (but only one function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates. 
 
-### 12.2 DurableFunction Http 
+####  Chart_v2
+Chart_v2 Activity is used to extract the list of the targeted company's daily chart information. The script was written to scale and merge multiple sources of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string list runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended togther and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates. 
+
+####  Chart_v3
+Chart_v3 Activity is used to extract the list of the targeted company's daily chart information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string list runs through the function chaining (but only function) Durable function pattern. This executes only single funtion at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates. 
+
+####  Holders
+Holders Activity is used to extract the list of the targeted company's daily holders information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates. 
+
+####  Holdings
+Holdings Activity is used to extract the list of the targeted company's daily holderigs information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
+
+####  Insider Roster
+Insider Roster Activity is used to extract the list of the targeted company's daily Roster information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
+
+####  Inisder Transactions
+Insider Transactions Activity is used to extract the list of the targeted company's daily transactions information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
+
+####  Options
+Options Activity is used to extract the list of the targeted company's daily options information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
+
+####  Profile
+Profile Activity is used to extract the list of the targeted company's daily profile information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
+
+####  Recommendations
+Recommendation Activity is used to extract the list of the targeted company's daily recommendation information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
+
+####  Time Series
+Time series Activity is used to extract the list of the targeted company's daily time series information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
+
+####  Upgrade Downgrades
+Upgrade Downgrades Activity is used to extract the list of the targeted company's daily upgrades and downgrades information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
+
+### 12.3 DurableFunction Http
+
+This feature simplifies calling HTTP APIs from your orchestrator functions. As you may know, in an orchestrator function, you're not allowed to perform any non-deterministic operations, so to call an HTTP API, you would need to call an activity function and make the HTTP request there. The Durable HTTP feature removes the need to create an additional activity function.
+
+Durable functions have several features that make it easy to incorporate durable orchestrations and entities into HTTP workflows- and utilising async operations tracking, with the approach, if the calling API's long-running operations, it would simply return 202 and the running status. We could call the API again to find the status of the running session until the underlying activities are completed. 
+
 ### 12.3 Orchestrator
+The orchestrator function is used to orchestrate the execution of other Durable functions within the function app (Stock App). The following are some of the characteristics of the orchestrator function.
+
+    - Orchestrator functions defines function workflows using procedural code. No declarative schemas or desginers are needed. 
+    - Orchestrator functions can call other durable functions synchronously and asynchronously. Output from called functions can be reliably saved to local variables.
+    - Orchestrator function are durable and reliable. Execition progress is automatically checkpointed when the function "yield". Local state is never lost when the process recycles or the VM reboots. 
+    - Orchestrator functions can be long-running. The total lifespan of an orchestrator instance can be seconds, days, months, or never ending. 
+
+In addition to calling activity functions, orchestrator function can call other orchestrator functions. For example, you can build a large orchestration out of a library of smaller orchestrator functions. Or you can run multiple instances of an orchestrator function in parallel. The sub-orchestrator function behaves just like activity functions from all caller's perspective. They can return a value, throw an exception, and be awaited by the parent orchestrator function. 
+
+For this particular execution strategy, 
+
 ### 12.4 Shared
+Mover file is a compilation of various code snips such as, blob_container_service_client, datalake_service_client, return_blob_files, blob_storage_download, blob_storage_upload, and blob_storage_upload, data_lake_storage_upload, and blob_storage_delete. The file represents all the data mover in and out of the functions local Memeory/ Storage (blob and datalake).
 
 ```mermaid
     graph TD
-    A[auto complete] 
-    A1[get_analysis]
-    A2[get_chart_v2]
-    A3[get_chart_v3]
-    A4[get_holders]
-    A5[get_holdings]
-    A6[get_insider_roster]
-    A7[get_insider_transactions]
-    A8[get_options]
-    A9[get_profile]
-    A10[get_recommendations]
-    A11[get_time_series]
-    A12[get_upgrade_downgrades]
+    A(Auto complete_file)
+    A1[Analysis]
+    A2[Chart_v2]
+    A3[Chart_v3]
+    A4[Holders]
+    A5[Holdings]
+    A6[Insider_roster]
+    A7[Insider_transactions]
+    A8[Options]
+    A9[Profile]
+    A10[Recommendations]
+    A11[Time_series]
+    A12[Upgrade_downgrades]
 
-    A --> A1
-    A --> A2
-    A --> A3
-    A --> A4
-    A --> A5
-    A --> A6
-    A --> A7
-    A --> A8
-    A --> A9
-    A --> A10
-    A --> A11
-    A --> A12
+    I[Data Lake]
+    J[Blob Storage]
 
+    subgraph Flow diagram details the overview of Stock App Engine Implementation
+    J --> A
+        subgraph Stock Application Durable Functions HTTP Start   
+            subgraph Orchestrator
+                subgraph Analysis sub-orch
+                    A --> A1
+                    end
+                
+                subgraph Chart_v2 sub-orch
+                    A --> A2
+                    end
+
+                subgraph Chart_v3 sub-orch
+                    A --> A3
+                    end
+                
+                subgraph Holders sub-orch
+                    A --> A4
+                    end
+
+                subgraph Holdings sub-orch
+                    A --> A5
+                    end
+
+                subgraph Insider roster sub-orch
+                    A --> A6
+                    end
+                
+                subgraph Insider transactions sub-orch
+                    A --> A7
+                    end
+                
+                subgraph Options sub-orch
+                    A --> A8
+                    end
+
+                subgraph Profile sub-orch
+                    A --> A9
+                    end
+
+                subgraph Recommendations sub-orch
+                    A --> A10
+                    end
+
+                subgraph Time series sub-orch
+                    A --> A11
+                    end
+
+                subgraph upgrades and downgrades sub-orch
+                    A --> A12
+                    end
+                end
+            end
+    A1 --> I
+    A2 --> I
+    A3 --> I
+    A4 --> I
+    A5 --> I
+    A6 --> I
+    A7 --> I
+    A8 --> I
+    A9 --> I
+    A10 --> I
+    A11 --> I
+    A12 --> I
+        end
+    
 ```
+
 # 13. Git push and Deploy
 ```
 # commit the changes and push 
