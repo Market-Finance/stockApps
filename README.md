@@ -6,11 +6,12 @@ The following details the implementation of the Stock Application (end-to-end)
 
 ## Table of Contents  
 - [Local System Setup](#1.-local-system-setup)
-- [Establish Global variables for Azure CLI](#2.-establish-global-variables-for-azure-cli)
-- [Create a new repository in Github](#3.-create-a-new-repository-in-github)
-
 <a name="1.-local-system-setup"/>
+
+- [Establish Global variables for Azure CLI](#2.-establish-global-variables-for-azure-cli)
 <a name="2.-establish-global-variables-for-azure-cli"/>
+
+- [Create a new repository in Github](#3.-create-a-new-repository-in-github)
 <a name="3.-create-a-new-repository-in-github"/>
 
 
