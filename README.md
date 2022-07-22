@@ -3,6 +3,12 @@
 Stock application aims to take the extracted Auto_complete file, create a list of the query string, and pass it to analysis, chart_v2, chart_v3, holders, holdings, insider_roster, insider_transactions, options, profile, recommendations, statistics_v2, statistics_v3, time_series and upgrades to extract the individual JSON request files. All the activities are wrapped into individual sub-orchestrator and called upon the orchestrator, and then JSON response is appended and passed through the Yahoo Finance API to pull standardised API's query string for other endpoint requests, as the schema's requirements are slightly different. This execution is the final soultion, as it mitigates non-deterministic workflow and utilises the parallelisation in API calls (maximising the call request). As a result, the sucessess of API calls is increased, and this approach improves the data quality by fixing the data upstream. 
 
 The following details the implementation of the Stock Application (end-to-end)
+
+## Table of Contents  
+- [Local System Setup](##1.-local-system-setup)
+- [Establish Global variables for Azure CLI](##2.establish-global-veraibles-for-azure-cli)
+
+
 ## 1. Local System Setup
 ```
 # Check for python version 3.7 or greater
