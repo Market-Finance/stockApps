@@ -8,7 +8,7 @@ The following details the implementation of the Stock Application (end-to-end)
 - [Local System Setup](#1.-local-system-setup)
 - [Establish Global variables for Azure CLI](#2.-establish-global-variables-for-azure-cli)
 <a name="1.-local-system-setup"/>
-<a name="2.establish-global-variables-for-azure-cli"/>
+<a name="2.-establish-global-variables-for-azure-cli"/>
 
 
 
