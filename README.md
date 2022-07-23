@@ -8,11 +8,62 @@ The following details the implementation of the Stock Application (end-to-end)
 - [Local System Setup](#1-local-system-setup)
 - [Establish Global variables for Azure CLI](#2-establish-global-variables-for-azure-cli)
 - [Create a new repository in Github](#3-create-a-new-repository-in-github)
+- [Create a Azure function app](#4-create-a-azure-function-app)
+- [Configure host.json file](#5-configure-hostjson-file)
+- [Configure the local.settings.json file](#6-configure-the-localsettingsjson-file)
+- [Create Azure function App on Azure portal](#7-create-azure-function-app-on-azure-portal)
+- [Setup and Configure variables for Azure function environment](#8-setup-and-configure-variables-for-azure-function-environment)
+- [Azure functions App role assigments for all the service such as blob storage, DataLake and keyvault](#9-azure-functions-app-role-assigments-for-all-the-service-such-as-blob-storage-datalake-and-keyvault)
+- [Setup CI/CD for Azure function application](#10-setup-cicd-for-azure-function-application)
+- [Check the configuration of the Azure function Application](#11-check-the-configuration-of-the-azure-function-application)
+- [Stock Application Implementation Overview](#12-stock-application-implementation-overview)
+    - [Durable Functions](#121-durable-functions)
+    - [Activities](#122-activities)
+        - [Analysis](#analysis)
+        - [Chart_v2](#chart_v2)
+        - [Chart_v3](#chart_v3)
+        - [Holders](#holders)
+        - [Holdings](#holdings)
+        - [Insider Roster](#insider-roster)
+        - [Insider Transactions](#insider-transactions)
+        - [Options](#options)
+        - [Profile](#profile)
+        - [Recommendations](#recommendations)
+        - [Time Series](#time-series)
+        - [Upgrade Downgrades](#upgrade-downgrades)
+    - [DurableFunction Http](#123-durablefunction-http)
+    - [Orchestrator](#124-orchestrator)
+    - [Shared](#125-shared)
 
 <a name="1-local-system-setup"/>
 <a name="2-establish-global-variables-for-azure-cli"/>
 <a name="3-create-a-new-repository-in-github"/>
-
+<a name="4-create-a-azure-function-app"/>
+<a name="5-configure-hostjson-file"/>
+<a name="#6-configure-the-localsettingsjson-file"/>
+<a name="#7-create-azure-function-app-on-azure-portal"/>
+<a name="#8-setup-and-configure-variables-for-azure-function-environment"/>
+<a name="#9-azure-functions-app-role-assigments-for-all-the-service-such-as-blob-storage-datalake-and-keyvault"/>
+<a name="#10-setup-cicd-for-azure-function-application"/>
+<a name="#11-check-the-configuration-of-the-azure-function-application"/>
+<a name="#12-stock-application-implementation-overview"/>
+<a name="#121-durable-functions"/>
+<a name="#122-activities"/>
+<a name="#analysis/">
+<a name="#chart_v2"/>
+<a name="#chart_v3"/>
+<a name="#holders"/>
+<a name="#holdings"/>
+<a name="#insider-roster"/>
+<a name="#insider-transactions"/>
+<a name="#options"/>
+<a name="#profile"/>
+<a name="#recommendations"/>
+<a name="#time-series"/>
+<a name="#upgrade-downgrades"/>
+<a name="#123-durablefunction-http"/>
+<a name="#124-orchestrator"/>
+<a name="#125-shared"/>
 
 
 ## 1. Local System Setup
@@ -222,7 +273,7 @@ Holdings Activity is used to extract the list of the targeted company's daily ho
 ####  Insider Roster
 Insider Roster Activity is used to extract the list of the targeted company's daily Roster information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-####  Inisder Transactions
+####  Insider Transactions
 Insider Transactions Activity is used to extract the list of the targeted company's daily transactions information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
 ####  Options
@@ -246,7 +297,7 @@ This feature simplifies calling HTTP APIs from your orchestrator functions. As y
 
 Durable functions have several features that make it easy to incorporate durable orchestrations and entities into HTTP workflows- and utilising async operations tracking, with the approach, if the calling API's long-running operations, it would simply return 202 and the running status. We could call the API again to find the status of the running session until the underlying activities are completed. 
 
-### 12.3 Orchestrator
+### 12.4 Orchestrator
 The orchestrator function is used to orchestrate the execution of other Durable functions within the function app (Stock App). The following are some of the characteristics of the orchestrator function.
 
     - Orchestrator functions defines function workflows using procedural code. No declarative schemas or desginers are needed. 
@@ -258,7 +309,7 @@ In addition to calling activity functions, orchestrator function can call other 
 
 For this particular execution strategy, Sub-Orchestrator were used to perform the activities. Due to the limitations of api call rates, fan-in and fan-out is not feasible and will result in non-deterministic error. So therefore, all the activities were enclosed solely within a sub-orchestrators respectively. This is done to achieve parallel execution on the orchestrating level. This was accomplished by explicitly defining a list of sub-orchestrators names and creating a provision all tasks (calling all the sub-orchestrators at once). By setting this configuration, we can run multiple device provisioning flows in parallel to facilitate the execution strategy by invoking it to the parent orchestrator.
 
-### 12.4 Shared
+### 12.5 Shared
 Mover file is a compilation of various code snips such as, blob_container_service_client, datalake_service_client, return_blob_files, blob_storage_download, blob_storage_upload, and blob_storage_upload, data_lake_storage_upload, and blob_storage_delete. The file represents all the data mover in and out of the functions local Memeory/ Storage (blob and datalake).
 
 ```mermaid
