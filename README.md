@@ -370,62 +370,46 @@ The durable function is an extension of Azure functions that utlisies stateful o
 ### 12.2 Activities
 The Azure function activity allows running Azure functions in an Azure Data Factory pipeline. By creating a linked services connection, we can run Azure functions. The related service can control the execution plan for an Azure function.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
-
 ####  Analysis
 Analysis Activity is used to extract the list of the targeted company's daily analysis information. The script was written to scale and merge mulitple sources of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string list runs through the function chaining (but only one function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates. 
-
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Chart_v2
 Chart_v2 Activity is used to extract the list of the targeted company's daily chart information. The script was written to scale and merge multiple sources of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string list runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended togther and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates. 
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Chart_v3
 Chart_v3 Activity is used to extract the list of the targeted company's daily chart information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string list runs through the function chaining (but only function) Durable function pattern. This executes only single funtion at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
-
 ####  Holders
 Holders Activity is used to extract the list of the targeted company's daily holders information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates. 
-
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Holdings
 Holdings Activity is used to extract the list of the targeted company's daily holderigs information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Insider Roster
 Insider Roster Activity is used to extract the list of the targeted company's daily Roster information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Insider Transactions
 Insider Transactions Activity is used to extract the list of the targeted company's daily transactions information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Options
 Options Activity is used to extract the list of the targeted company's daily options information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Profile
 Profile Activity is used to extract the list of the targeted company's daily profile information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Recommendations
 Recommendation Activity is used to extract the list of the targeted company's daily recommendation information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Time Series
 Time series Activity is used to extract the list of the targeted company's daily time series information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
 
-[Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ####  Upgrade Downgrades
 Upgrade Downgrades Activity is used to extract the list of the targeted company's daily upgrades and downgrades information. The script was written to scale and merge multiple source of the company's data. So the business logic takes in the Auto_complete file to extract the variables needed for the endpoint query string. The query string lists runs through the function chaining (but only function) Durable function pattern. This executes only single function at a time i.e. series execution and then awaits for all functions to finish. In our case, during the function chaining the JSON response is appended together and pushed to Data Lake and blob storage. Given the current requirements of the market scanner, only NASDAQ and ASX listed companies are used in the list consolidation. Further updates will include NZX, etc., and the necessary framework is established to accommodate the updates.
