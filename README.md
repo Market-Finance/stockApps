@@ -50,7 +50,7 @@ The following details the implementation of the Stock Application (end-to-end)
 <a name="#12-stock-application-implementation-overview"/>
 <a name="#121-durable-functions"/>
 <a name="#122-activities"/>
-<a name="#analysis/">
+<a name="#analysis"/>
 <a name="#chart_v2"/>
 <a name="#chart_v3"/>
 <a name="#holders"/>
