@@ -439,6 +439,10 @@ For this particular execution strategy, Sub-Orchestrator were used to perform th
 [Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
 
 ### 12.5 Shared
+#### 12.5.1 Function Requests
+Function Request is a generalised function named miner that takes in the API endpoint url and its respective query string. It checks for the error message and tries to execute the call again (if it exceeds the rate limit) by adding a sleep statement for a few seconds. This returns a JSON response and gets appended while the miner function gets used in an activity function.
+
+#### 12.5.2 Mover
 Mover file is a compilation of various code snips such as, blob_container_service_client, datalake_service_client, return_blob_files, blob_storage_download, blob_storage_upload, and blob_storage_upload, data_lake_storage_upload, and blob_storage_delete. The file represents all the data mover in and out of the functions local Memeory/ Storage (blob and datalake).
 
 [Back to Table of Contents](https://github.com/Market-Finance/stockApps#table-of-contents)
